@@ -96,6 +96,9 @@ function sanitazeMetadata(data, schema){
     return lodash.pick(lodash.defaults(data, schema), lodash.keys(schema));
 }
 
+//TODO: 1. Check that the keys are valid.
+//TODO: 2. Check that the values corresponding to enums are valid.
+//TODO: 3. Check that it has all he compulsory properties.
 /**
  * Sanitazes the input and then validates that it has the schema's properties.
  * @param  {Object} data   Object to validate
