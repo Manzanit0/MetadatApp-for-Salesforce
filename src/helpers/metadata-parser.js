@@ -75,7 +75,7 @@ function parseCustomFields(inputFile) {
 function parseCustomField(jsonRow) {
     return new Promise((resolve, reject) => {
 
-        if(jsonRow.fieldType !== undefined && isValidData(jsonRow, customfieldSchema[jsonRow.fieldType])){
+        if(jsonRow.type !== undefined && isValidData(jsonRow, customfieldSchema[jsonRow.type])){
             const customField = jsontoxml(jsonRow);
             //TODO: comprobar customField.
             resolve(customField);

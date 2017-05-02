@@ -1,17 +1,17 @@
 //TODO: complete with required fields.
 const textfield = {
-    fieldType: null,
+    type: null,
     label: null,
-    developerName: null,
+    fullName: null,
     required: false,
     length: 100
 };
 
 //TODO: complete with required fields.
 const numberfield = {
-    fieldType: null,
+    type: null,
     label: null,
-    developerName: null,
+    fullName: null,
     required: false,
     length: 100,
     precision: 0
