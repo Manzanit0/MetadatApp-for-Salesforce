@@ -7,6 +7,34 @@ jsontoxml = require('jsontoxml'),
    lodash = require('lodash');
 
 /**
+ * Parses a generic CSV file to JSON.
+ * @param  {Csv} inputFile csv file
+ * @return {Array}         csv transformed to json
+ */
+function csvToJson(inputFile) {
+    let metadataJson = [];
+
+    return new Promise((resolve, reject) => {
+        csv()
+            .fromFile(inputFile)
+            .on('json', (jsonObj) => {
+                console.log(jsonObj);
+                // Append the new field at the end of the file.
+                metadataJson.push(jsonObj);
+                console.log(metadataJson);
+            })
+            .on('done', (error) => {
+                if(error){
+                    reject(error);
+                }
+                else{
+                    resolve(metadataJson);
+                }
+            });
+    });
+}
+
+/**
  * Validates and parses the CustomFields CSV file to SFDC metadata xml.
  * @param  {Csv} inputFile CustomFields in CSV file.
  * @return {Xml}           CustomFields ready to upload to SFDC.
@@ -89,3 +117,4 @@ function isValidData(data, schema){
 }
 
 module.exports.parseCustomFields = parseCustomFields;
+module.exports.csvToJson = csvToJson;
