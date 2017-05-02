@@ -1,0 +1,29 @@
+{
+  "name": "metatadapp-for-salesforce",
+  "version": "1.0.0",
+  "description": "app to auto-create metadata schema for salesforce from a spreadsheet",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "csvtojson": "^1.1.4",
+    "express": "^4.15.2",
+    "jsontoxml": "0.0.11",
+    "lodash": "^4.17.4",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manzanit0/MetadatApp-for-Salesforce.git"
+  },
+  "author": "Javier G. Manzano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manzanit0/MetadatApp-for-Salesforce/issues"
+  },
+  "homepage": "https://github.com/Manzanit0/MetadatApp-for-Salesforce#readme"
+}

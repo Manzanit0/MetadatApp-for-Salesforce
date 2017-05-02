@@ -1,0 +1,3 @@
+fieldTypeee,label,developerName,required,length
+textfield,my field,my_field,false,255
+textfield,my field 2,my_field_2,true,255
