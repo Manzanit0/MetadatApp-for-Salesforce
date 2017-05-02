@@ -4,6 +4,8 @@ const express = require('express'),
        router = express.Router(),
       multer  = require('multer'),
        upload = multer({ dest: 'uploads/' });
+       
+//TODO: find a way for multer to not create an "upload" each time the enpoint recieves a request.
 
 const csvParser = require('../parser/csv-to-salesforce.js');
 
