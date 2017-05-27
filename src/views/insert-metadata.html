@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html style="background-image:url(../resources/login-background.jpg)">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css" />
+</head>
+<body>
+    <!--  HEADER -->
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                    <svg class="slds-icon" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../node_modules/@salesforce-ux/design-system/assets/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+                    </svg>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle">MetadataApp</h1>
+                <p class="slds-text-body_small slds-line-height_reset">Inserción de campos personalizados</p>
+            </div>
+        </div>
+    </div>
+    <!-- /HEADER  -->
+
+    <!--  INSERTION PANEL-->
+    <div class="slds-grid slds-grid_pull-padded-medium slds-m-around_small">
+        <div class="slds-col slds-p-horizontal_medium">
+            <div class="slds-panel slds-grid slds-grid_vertical slds-nowrap">
+                <div class="slds-panel__section">
+                    <div class="slds-form slds-form_stacked">
+                        <div class="slds-form-element slds-m-bottom_small">
+                            <span class="slds-form-element__label" id="file-selector-id">Metadata file</span>
+                            <div class="slds-form-element__control">
+                                <div class="slds-file-selector slds-file-selector_files">
+                                    <div class="slds-file-selector__dropzone">
+                                        <input type="file" class="slds-file-selector__input slds-assistive-text" accept="image/png" id="file-upload-input-01" aria-describedby="file-selector-id">
+                                        <label class="slds-file-selector__body" for="file-upload-input-01">
+                                            <span class="slds-file-selector__button slds-button slds-button_neutral">
+                                                <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../node_modules/@salesforce-ux/design-system/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
+                                                </svg>Upload File</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <button class="slds-button slds-button_brand">Upload to Salesforce</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-p-horizontal_medium">
+                <!--  Here should go a small preview of what is being uploaded-->
+            </div>
+        </div>
+
+        <!-- LOG AFTER-INSERT -->
+        <div class="slds-panel slds-grid slds-grid_vertical slds-nowrap slds-m-around_small slds-p-horizontal_medium slds-p-vertical_small">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Insertion Log</span>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content">
+                    <div class="slds-scrollable_y">
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control slds-border_bottom">
+                            <div class="slds-form-element__static">
+                              <p>13/01/2017 02:34:54 |ERROR| The custom field Casa_Existente__c has failed to insert</p>
+                              <p>13/01/2017 02:34:55 |ERROR| The custom field Sueldo_Bruto__c has failed insert </p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
