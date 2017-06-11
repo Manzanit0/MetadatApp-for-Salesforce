@@ -15,6 +15,7 @@ mongoose.Promise = global.Promise;
 
 // Express configuration.
 const app = express();
+app.use(bodyParser.json())
 require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.

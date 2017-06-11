@@ -12,7 +12,6 @@ const express = require('express'),
  * Import user model
  */
 const userSchema = require('../models/user.model');
-
 const User = mongoose.model('User', userSchema);
 
 /**
@@ -24,14 +23,22 @@ const User = mongoose.model('User', userSchema);
 const postUser = (req, res) => {
     if (req.body) {
         let user = new User(req.body);
-
-        user.save()
+        
+        // Check if a user with that email or username exists already.
+        getUserByUserNameOrEmail(req.body.username)
             .then(user => {
-                res.status(201).json({result: 'ok', code: 201, data: req.body});
+                res.status(409).json({result: 'error', code: 409, data: {msg: 'User already exists with that username or email.'}});
             })
-            .catch(error => {
-                res.status(500).json({result: 'error', code: 500, data: {msg: error}});
-            });
+            // If the user doesn't exist, then create it.
+            .catch(err => {
+                user.save()
+                    .then(user => {
+                        res.status(201).json({result: 'ok', code: 201, data: req.body});
+                    })
+                    .catch(error => {
+                        res.status(500).json({result: 'error', code: 500, data: {msg: error}});
+                });
+        });
     }
     else {
         res.status(422).json({result: 'error', code: 422, data: {msg: 'Unprocessable Entity'}});
@@ -47,7 +54,7 @@ const postUser = (req, res) => {
 const getUserByUsername = (req, res) => {
     const username = req.params.username;
 
-    if (username) {
+    if (username) { //TODO: reuse the below function.
         User.findOne({ 'username': username })
             .then(user => {
                 if (user !== null) {
@@ -62,6 +69,20 @@ const getUserByUsername = (req, res) => {
         res.status(422).json({result: 'error', code: 422, data: {msg: 'Unprocessable Entity'}});
     }
 };
+
+function getUserByUserNameOrEmail(userNameOrEmail) {
+     return new Promise((resolve, reject) => {
+         User.findOne({$or: [{username: userNameOrEmail}, {email: userNameOrEmail}]})
+            .then(user => {
+                if (user !== null) {
+                    resolve(user);
+                } else {
+                    reject({"msg":"No content. WTF?"}); //TODO: When can this happen??
+                }
+            })
+            .catch(err => reject(err));
+     });
+}
 
 router.post('/', postUser); //TODO: should we implement auth to create users?
 router.get('/:username', passport.authenticate('basic', { session: false }), getUserByUsername);
