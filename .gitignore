@@ -41,3 +41,11 @@ jspm_packages
 
 #uploads directory
 uploads
+
+#Visual Code folder
+.vscode
+
+#Finder files
+.DS_Store
+
+package-lock.json
