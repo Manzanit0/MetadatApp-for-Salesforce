@@ -2,11 +2,11 @@
 
 // External libs.
 const express = require('express'),
-path = require('path'),
-mongoose = require('mongoose'),
-bodyParser = require('body-parser'), //Parse JSON in body request
-passport = require('passport'),
-Strategy = require('passport-http').BasicStrategy;
+         path = require('path'),
+     mongoose = require('mongoose'),
+   bodyParser = require('body-parser'), //Parse JSON in body request
+     passport = require('passport'),
+     Strategy = require('passport-http').BasicStrategy;
 
 const userSchema = require('./models/user.model');
 const User = mongoose.model('User', userSchema);
@@ -23,7 +23,7 @@ require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.
 const config = require('./config/server.config'),
-db = require('./config/db.config');
+          db = require('./config/db.config');
 
 // Database connection handler.
 mongoose.connect(db.mongoURI[app.settings.env], function(err, res) {
@@ -57,16 +57,5 @@ app.listen(config.port, () => console.log('Metadatapp listening on port ' + conf
 setTimeout(() => {
     console.log('mongoose connection state: ' + mongoose.connection.readyState);
 }, 5000);
-
-// Configuration for the web-ui
-app.get('/login', function(req, res) {
-     // load the single view file (angular will handle the page changes on the front-end)
-    res.sendFile('login.html', { root: path.join(__dirname, '/web-ui/views/') }); 
-});
-
-app.get('/panel', function(req, res) {
-     // load the single view file (angular will handle the page changes on the front-end)
-    res.sendFile('insert-metadata.html', { root: path.join(__dirname, '/web-ui/views/') }); 
-});
 
 module.exports = app;
