@@ -2,6 +2,7 @@
 
 // External libs.
 const express = require('express'),
+path = require('path'),
 mongoose = require('mongoose'),
 bodyParser = require('body-parser'), //Parse JSON in body request
 passport = require('passport'),
@@ -15,7 +16,9 @@ mongoose.Promise = global.Promise;
 
 // Express configuration.
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(express.static(path.join(__dirname, 'resources')));
 require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.
@@ -47,8 +50,6 @@ passport.use(new Strategy(
     }
 ));
 
-app.use(passport.initialize());
-
 // Init app.
 app.listen(config.port, () => console.log('Metadatapp listening on port ' + config.port + '!\n'));
 
@@ -56,5 +57,16 @@ app.listen(config.port, () => console.log('Metadatapp listening on port ' + conf
 setTimeout(() => {
     console.log('mongoose connection state: ' + mongoose.connection.readyState);
 }, 5000);
+
+// Configuration for the web-ui
+app.get('/login', function(req, res) {
+     // load the single view file (angular will handle the page changes on the front-end)
+    res.sendFile('login.html', { root: path.join(__dirname, '/web-ui/views/') }); 
+});
+
+app.get('/panel', function(req, res) {
+     // load the single view file (angular will handle the page changes on the front-end)
+    res.sendFile('insert-metadata.html', { root: path.join(__dirname, '/web-ui/views/') }); 
+});
 
 module.exports = app;
