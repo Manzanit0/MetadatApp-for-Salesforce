@@ -85,6 +85,6 @@ function getUserByUserNameOrEmail(userNameOrEmail) {
 }
 
 router.post('/', postUser); //TODO: should we implement auth to create users?
-router.get('/:username', passport.authenticate('basic', { session: false }), getUserByUsername);
+router.get('/:username', getUserByUsername);
 
 module.exports = router;

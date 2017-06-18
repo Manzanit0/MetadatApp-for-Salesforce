@@ -27,9 +27,10 @@
                         <div class="slds-form-element__control slds-m-bottom_small ">
                           <input type="password" id="password-id" class="slds-input" placeholder="Password" ng-model="controller.password">
                         </div>
+                        <div class="slds-text-color_error" ng-show="controller.unauthorized">Username or password is incorrect.</div>
                       </div>
                       <div class="slds-form-element">
-                          <button class="slds-button slds-button_neutral" ng-click="controller.accessPanel()">Login</button>
+                          <button class="slds-button slds-button_neutral" ng-disabled="dataLoading" ng-click="controller.login()">Login</button>
                       </div>
                       <div class="slds-form-element">
                           <div class="slds-text-body_small slds-float_right">Sign up</div>
