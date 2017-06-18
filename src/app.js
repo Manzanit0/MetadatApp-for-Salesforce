@@ -18,7 +18,7 @@ mongoose.Promise = global.Promise;
 const app = express();
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, 'resources')));
+app.use(express.static(path.join(__dirname, 'web-ui'))); // expose frontend.
 require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.
