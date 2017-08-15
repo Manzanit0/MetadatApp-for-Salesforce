@@ -19,6 +19,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'web-ui'))); // expose frontend.
+app.use('/@salesforce-ux', express.static(path.join(__dirname, '../node_modules/@salesforce-ux'))); // expose SLDS.
 require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.
