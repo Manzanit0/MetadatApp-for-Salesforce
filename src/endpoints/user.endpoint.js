@@ -11,8 +11,8 @@ const express = require('express'),
 /**
  * Import user model
  */
-const userSchema = require('../models/user.model');
-const User = mongoose.model('User', userSchema);
+const userSchema = require('../models/user.model'),
+    User = mongoose.model('User', userSchema);
 
 /**
  * Create new user
@@ -51,23 +51,34 @@ const postUser = (req, res) => {
  * @param req
  * @param res
  */
-const getUserByUsername = (req, res) => {
-    const username = req.params.username;
+const getUser = (req, res) => {
+    let userId = req.params.username;
 
-    if (username) { //TODO: reuse the below function.
-        User.findOne({ 'username': username })
-            .then(user => {
-                if (user !== null) {
-                    //TODO: response - user without password!
-                    res.status(200).json({result: 'ok', code: 200, data: user});
-                } else {
-                    res.status(204).json();
-                }
-            })
-            .catch(err => res.status(500).json({result: 'error', code: 500, data: {}}));
-    } else {
-        res.status(422).json({result: 'error', code: 422, data: {msg: 'Unprocessable Entity'}});
-    }
+    getUserByUserNameOrEmail(userId)
+        .then(user => {
+            if (user !== null) {
+                res.status(200).json({result: 'ok', code: 200, data: user});
+            } else {
+                res.status(204).json();
+            }
+        })
+        .catch(err => res.status(500).json({result: 'error', code: 500, data: {}}));
+};
+
+/**
+ * Gets all users
+ *
+ * @param req
+ * @param res
+ */
+const getAllUsers = (req, res) => {
+    User.find()
+        .then(users => {
+            res.status(200).json({result: 'ok', code: 200, data: users});
+        })
+        .catch(err => {
+            res.status(500).json({result: 'error', code: 500, data: {}});
+        });
 };
 
 function getUserByUserNameOrEmail(userNameOrEmail) {
@@ -84,7 +95,9 @@ function getUserByUserNameOrEmail(userNameOrEmail) {
      });
 }
 
-router.post('/', postUser); //TODO: should we implement auth to create users?
-router.get('/:username', getUserByUsername);
+// TODO: Add Authentication to the endpoints. The getUser/getAllUsers should require special permissions.
+router.post('/', postUser);
+router.post('/:username', getUser);
+router.get('/', getAllUsers);
 
 module.exports = router;

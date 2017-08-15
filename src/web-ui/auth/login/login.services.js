@@ -6,8 +6,7 @@ angular.module('Authentication')
 
             service.Login = function(username, password) {
                 return new Promise((resolve, reject) => {
-                    //TODO: login should be POST
-                    $http.get('/users/' + username)
+                    $http.post('/users/' + username)
                         .then(data => {
                             resolve(data);
                         })

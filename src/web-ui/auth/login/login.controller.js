@@ -27,9 +27,14 @@ angular.module('Authentication', [])
                 }
             })
             .catch(error => {
-                controller.dataLoading = false;
-                console.log(error);
-                //TODO: display error - reuse unauthorized error (make it dynamic).
+                 $scope.$apply(() => {
+                    controller.dataLoading = false;
+                    
+                    console.log(error);
+                    controller.serverError = true;
+                    controller.serverErrorMsg = 'An error has ocurred, please contact support@metadatapp.com';
+                    //TODO: send email with error to me.
+                });
         });
     };
 

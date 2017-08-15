@@ -15,11 +15,16 @@ const User = mongoose.model('User', userSchema);
 mongoose.Promise = global.Promise;
 
 // Express configuration.
-const app = express();
+const app = express(); //TODO: We should create an HTTPS server too.
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, 'web-ui'))); // expose frontend.
-app.use('/@salesforce-ux', express.static(path.join(__dirname, '../node_modules/@salesforce-ux'))); // expose SLDS.
+
+ // Expose frontend.
+app.use('/web-ui', express.static(path.join(__dirname, '/web-ui')));
+
+// Expose SLDS.
+app.use('/@salesforce-ux', express.static(path.join(__dirname, '../node_modules/@salesforce-ux')));
+
 require('./endpoints/routes.js')(app);
 
 // Server and DB configuration.
